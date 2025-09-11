@@ -100,7 +100,7 @@ public abstract class BrokerClient implements Protocol {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            this.bossGroup.close();
+            this.bossGroup.shutdownGracefully();
         }
     }
 
