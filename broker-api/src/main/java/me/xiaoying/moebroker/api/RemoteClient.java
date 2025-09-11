@@ -32,8 +32,9 @@ public class RemoteClient implements Protocol{
         this.channel.writeAndFlush(new RequestMessage(object));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object invokeSync(Object object, long timeoutMillis) {
+    public <T> T invokeSync(Object object, long timeoutMillis) {
         CompletableFuture<Object> future = new CompletableFuture<>();
 
         RequestMessage message = new RequestMessage(object)
@@ -46,7 +47,7 @@ public class RemoteClient implements Protocol{
         this.channel.writeAndFlush(message);
 
         try {
-            return future.get(timeoutMillis, TimeUnit.MILLISECONDS);
+            return (T) future.get(timeoutMillis, TimeUnit.MILLISECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             throw new RuntimeException(e);
         }

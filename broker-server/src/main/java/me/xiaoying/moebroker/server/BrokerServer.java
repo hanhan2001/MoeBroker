@@ -117,8 +117,10 @@ public abstract class BrokerServer implements Protocol {
         this.channelFuture.channel().writeAndFlush(new RequestMessage(object));
     }
 
+
+    @SuppressWarnings("unchecked")
     @Override
-    public Object invokeSync(Object object, long timeoutMillis) {
+    public <T> T invokeSync(Object object, long timeoutMillis) {
         CompletableFuture<Object> future = new CompletableFuture<>();
 
         RequestMessage message = new RequestMessage(object)
@@ -131,7 +133,7 @@ public abstract class BrokerServer implements Protocol {
         this.channelFuture.channel().writeAndFlush(message);
 
         try {
-            return future.get(timeoutMillis, TimeUnit.MILLISECONDS);
+            return (T) future.get(timeoutMillis, TimeUnit.MILLISECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             throw new RuntimeException(e);
         }
