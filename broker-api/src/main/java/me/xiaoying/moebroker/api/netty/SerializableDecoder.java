@@ -28,11 +28,4 @@ public class SerializableDecoder extends ByteToMessageDecoder {
         Object obj = SerializationUtil.deserialize(bytes);
         out.add(obj);
     }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        System.err.println("[MoeBroker Decoder] Exception caught: ");
-        cause.printStackTrace();
-        ctx.close();
-    }
 }

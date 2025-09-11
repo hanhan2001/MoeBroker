@@ -57,9 +57,6 @@ public class MessageHelper {
         if (!requestMessage.isNeedResponse())
             return;
 
-        System.out.println(requestMessage.getUuid());
-        System.out.println(message.getTarget());
-
         MessageHelper.captureMessage(message, requestMessage.getChannel());
         requestMessage.getChannel().writeAndFlush(message);
     }

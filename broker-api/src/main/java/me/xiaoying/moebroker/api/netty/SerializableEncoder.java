@@ -15,11 +15,4 @@ public class SerializableEncoder extends MessageToByteEncoder<Serializable> {
         out.writeInt(bytes.length);
         out.writeBytes(bytes);
     }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        System.err.println("[MoeBroker Decoder] Exception caught: ");
-        cause.printStackTrace();
-        ctx.close();
-    }
 }
