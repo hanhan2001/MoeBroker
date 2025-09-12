@@ -1,6 +1,5 @@
 plugins {
     id("moebroker-publish")
-//    alias(libs.plugins.shadow)
 }
 
 dependencies {
