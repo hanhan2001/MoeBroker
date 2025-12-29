@@ -7,8 +7,9 @@ allprojects {
     version = "1.0.0"
 
     repositories {
-        mavenLocal()
         mavenCentral()
+
+        maven("https://312Hz.github.io/maven-repository")
     }
 }
 
